@@ -1,10 +1,10 @@
 ruby:
-  sko_logo = Base64.encode64 Rails.application.assets['logo_sko.png'].to_s
+  logo = Base64.encode64 Rails.application.assets['logo_12ul.png'].to_s
   contact = note.contact
   address = contact.address
 section.sheet.padding-20mm
   .columns.is-mobile.page-header
-    img.logo src="data:image/png;base64,#{sko_logo}" alt=""
+    img.logo src="data:image/png;base64,#{logo}" alt=""
     h1
       = I18n.t("mongoid.enums.note.kind.#{note.kind}")
   hr
