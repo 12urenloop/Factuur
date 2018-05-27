@@ -25,6 +25,11 @@ nl:
           invoice: "Factuur"
           credit: "Kredietnota"
           income: "Inkomstennota"
+      cost:
+        vat:
+          v0: "0%"
+          v6: "6%"
+          v21: "21%"
   date:
     formats:
       default: "%d-%m-%Y"

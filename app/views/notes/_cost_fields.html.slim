@@ -2,19 +2,22 @@ tr.nested-fields
   td
     .field
       p.control
-        = f.date_field :date, label: false, value: Date.today.strftime, class: 'input'
-
+        = f.number_field :amount, step: 1, label: false, class: 'input'
   td
     .field
       p.control
         = f.text_field :description, label: false, class: 'input'
-
   td
     .field
       p.control.has-icon
-        = f.number_field :amount, step: 0.01, label: false, class: 'input'
+        = f.number_field :price, step: 0.01, label: false, class: 'input'
         span.icon.is-small.is-left
           = fa_icon "euro"
+  td
+    .field
+      p.control
+        .select
+          = f.select(:vat, options_for_select(Cost.vat_i18n_select_options), class: 'input')
   td
     .field.has-text-centered
       = link_to_remove_association f, class: 'button is-danger is-outlined' do

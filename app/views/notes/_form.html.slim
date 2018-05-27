@@ -20,11 +20,6 @@
         = f.select(:kind, options_for_select(Note.kind_i18n_select_options), class: 'input')
 
   .field
-    = f.label :vat_percentage, class: 'label'
-    .control
-      = f.number_field :vat_percentage, in: 0..100, class: 'input'
-
-  .field
     = f.label :costs, class: 'label'
     table.table
       thead

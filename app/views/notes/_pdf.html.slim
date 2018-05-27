@@ -2,6 +2,8 @@ ruby:
   logo = Base64.encode64 Rails.application.assets['logo_12ul.png'].to_s
   contact = note.contact
   address = contact.address
+  net_total = note.costs.map{ |c| c.price * c.amount }.sum
+  vat_group = Hash[note.costs.group_by(&:vat).map{ |vat, costs| [vat, costs.map{ |cost| cost.amount * cost.price * cost.vat[1..-1].to_i / 100 }.sum.round(2)] }]
 section.sheet.padding-20mm
   .columns.is-mobile.page-header
     img.logo src="data:image/png;base64,#{logo}" alt=""
@@ -11,11 +13,9 @@ section.sheet.padding-20mm
   .columns.is-mobile.content
     .column
       p
-        |Student Kick-Off vzw
+        | Gentse 12urenloop vzw
         br
-        | Minnemeers Business Center
-        br
-        | Blekerijstraat 75 Bus 3
+        | Hoveniersberg 24
         br
         | 9000 Gent
         br
@@ -24,113 +24,97 @@ section.sheet.padding-20mm
         br
         | Ondernemingsnummer:
         br
-        | BE 0886.847.343
+        | BE 0692.988.190
     .column
       p
-        = contact.name.upcase
+        = contact.name
         - if address.beneficiary
           br
-          = address.beneficiary.upcase
+          = "t.a.v. #{address.beneficiary}"
         br
-        = address.street.upcase
+        = address.street
         br
-        | #{address.zip_code.upcase} #{address.city.upcase}
+        | #{address.zip_code} #{address.city}
         br
-        = address.country.upcase
+        = address.country
   hr
   .columns.is-mobile.content
     .column
       table.table.is-bordered.infotable
-        tbody
-          tr
-            td Factuur voor verkoop en levering
-          tr
-            td BTW Nummer Klant
-          tr
-            td = contact.vatnumber
-
-    .column
-      table.table.is-bordered.infotable
-        thead
-          tr
-            th[colspan="4"] Gegevens Factuur
-          tr
-            th Factuurnummer
-            //th Klantennummer
-            th Factuurdatum
-            th Vervaldatum
-        tbody
-          tr
-            td = note.id
-            //td = contact.id
-            td = l Date.today
-            td = l Date.today + 30.days
-  .columns.is-mobile.content
-    .column
-      table.table.is-bordered.factuurtable
-        thead
-          tr
-            th Datum
-            th Omschrijving
-            th Bedrag
+        tr.colored
+          th[colspan="5"]
+            .level
+              .level-left
+                h2 = "Factuur #{note.id}"
+              .level-item
+                = "Datum: #{l Date.today}"
+              - if contact.vatnumber
+                .level-right
+                  = "BTW #{contact.vatnumber}"
+        tr
+          th Aantal
+          th Omschrijving
+          th Prijs
+          th BTW
+          th Netto
         tbody
           - note.costs.each do |cost|
             tr
               td
-                / 'l' is the rails localization helper
-                = l cost.date
+                = cost.amount
               td
                 = cost.description
               td
-                = number_to_currency cost.amount
+                = number_to_currency cost.price
+              td
+                = I18n.t("mongoid.enums.cost.vat.#{cost.vat}")
+              td
+                = number_to_currency cost.amount * cost.price
+          tr.colored
+            td[colspan="2"]
+            td[colspan="2"] Subtotaal
+            td = number_to_currency net_total
+
   .columns.is-mobile.content
     .column
-      p Gelieve binnen 30 kalenderdagen na factuurdatum te betalen op onderstaande rekening met vermelding van factuurnummer.
-      table.unstyled-table
-        tbody
-          tr
-            td IBAN
-            td BE35 7370 1880 7737
-          tr
-            td BIC
-            td KREDBEBB
+      strong Contact
+      p
+        | Benjamin Cousaert
+        br
+        | benjamin.cousaert@12urenloop.be
+        br
+        | +32 (0)477 67 48 68
     .column
       table.table.is-bordered
         tbody
-          tr
-            td NETTO
-            td
-              = number_to_currency note.net_total
-          tr
-            td BTW (#{number_to_percentage note.vat_percentage, precision: 0})
-            td
-              = number_to_currency note.vat_total
-          tr
+          - Cost::VAT.each do |vat|
+            - if vat_group.has_key? vat
+              tr
+                td  = I18n.t("mongoid.enums.cost.vat.#{vat}")
+                td = number_to_currency vat_group[vat]
+          tr.colored
             th Totaal (incl. BTW)
             td
-              strong
-                = number_to_currency note.gross_total
-  .content
-    p
-      strong Contact
-    .columns.is-mobile
-      .column Charlotte Parmentier
-      .column Juridisch/Financien
-      .column charlotte.parmentier@studentkickoff.be
-      .column +32 (0)470 04 10 65
-    p Alle facturen worden geregeld door onze Algemene Voorwaarden (zie volgende bladzijde).
+              strong = number_to_currency vat_group.values.sum + net_total
+
+  .columns
+    .column
+      p
+        strong Gelieve bovenvermeld bedrag binnen de 14 dagen na factuurdatum te betalen op rekeningnummer BE23 4470 0889 2191 met vermelding van het factuurnummer.
+        |  Alle facturen worden geregeld door onze Algemene Voorwaarden (zie volgende bladzijde).
+
 section.sheet.padding-10mm
   .content
     h2 ALGEMENE VOORWAARDEN
-    p De rechtsverhouding tussen Student Kick Off vzw, hierna genoemd SKO met maatschappelijke zetel te Botermarkt 1, 9000 Gent, ingeschreven in de KBO onder het nummer 0886.847.343 en de contractspartij, wordt beheerst door onderhavige algemene voorwaarden, de facturen en de eventuele specifieke voorwaarden, opgenomen in de hoofdovereenkomst tussen partijen (hierna gezamenlijk aangeduid als "de Overeenkomst"). De Overeenkomst vernietigt en vervangt alle schriftelijke of mondelinge contracten, voorstellen en verbintenissen die betrekking hebben op hetzelfde voorwerp en die aan de datum van deze Overeenkomst zouden voorafgaan. De Overeenkomst heeft voorrang op de algemene en/of andere voorwaarden van de klant, zelfs indien deze bepalen dat zij als enige gelden. Afwijkingen ten opzichte van de Overeenkomst zijn slechts mogelijk na voorafgaande en schriftelijke toestemming van SKO. SKO behoudt zich het recht voor om de bepalingen van de Overeenkomst te wijzigen.
+    p De rechtsverhouding tussen 12urenloop Gent vzw, hierna genoemd 12UL met maatschappelijke zetel te Hoveniersberg 24, 9000 Gent, ingeschreven in de KBO onder het nummer 0692.988.190 en de contractspartij, wordt beheerst door onderhavige algemene voorwaarden, de facturen en de eventuele specifieke voorwaarden, opgenomen in de hoofdovereenkomst tussen partijen (hierna gezamenlijk aangeduid als "de Overeenkomst"). De Overeenkomst vernietigt en vervangt alle schriftelijke of mondelinge contracten, voorstellen en verbintenissen die betrekking hebben op hetzelfde voorwerp en die aan de datum van deze Overeenkomst zouden voorafgaan. De Overeenkomst heeft voorrang op de algemene en/of andere voorwaarden van de klant, zelfs indien deze bepalen dat zij als enige gelden. Afwijkingen ten opzichte van de Overeenkomst zijn slechts mogelijk na voorafgaande en schriftelijke toestemming van de 12UL. De 12UL behoudt zich het recht voor om de bepalingen van de Overeenkomst te wijzigen.
     ol
       li Onze algemene voorwaarden zijn van toepassing op alle overeenkomsten die worden afgesloten, behoudens uitdrukkelijk andersluidend beding en met uitsluiting van de algemene voorwaarden van de contractspartij.
-      li Alle facturen dienen per overschrijving betaald te worden binnen dertig dagen na de factuurdatum en dit op de meegedeelde rekening en met vermelding van de meegedeelde gegevens op de factuur.
+      li Alle facturen dienen per overschrijving betaald te worden binnen veertien dagen na de factuurdatum en dit op de meegedeelde rekening en met vermelding van de meegedeelde gegevens op de factuur.
       li Al de prijzen vermeld op de factuur zijn exclusief 21% BTW, tenzij uitdrukkelijk anders vermeld wordt.
       li Bij een laattijdige betaling van de factuur zal een forfaitaire vergoeding van 15,00 EUR worden aangerekend per aanmaning die verstuurd wordt naar de ingebreke zijnde contractspartij.
       li Bovenop deze forfaitaire vergoeding zal bij een laattijdige betaling van de factuur, van rechtswege en zonder voorafgaande ingebrekestelling een interest verschuldigd zijn van 10% op het openstaand saldo van de factuur en dit per begonnen maand, waarbij elke begonnen maand een vervallen maand geacht wordt te zijn.
-      li Bij een laattijdige betaling van een factuur worden alle schuldvorderingen die SKO bezit ten aanzien van de ingebreke zijnde contractspartij, onmiddellijk opeisbaar.
-      li Wanneer SKO ten gevolge van overmacht niet in de mogelijkheid verkeert de overeenkomst uit te voeren, doordat het festival niet georganiseerd kan worden, zullen de voorschotten niet terugbetaald kunnen worden. In ieder geval is de contractspartij gehouden zijn deel van de overeenkomst uit te voeren pro rata van het aantal dagen dat SKO zijn deel van de overeenkomst heeft uitgevoerd.
-      li Indien door de contractspartij materiaal werd geleend aan SKO zal geen enkele vergoeding aangerekend kunnen worden aan SKO voor het verlies van materiaal, indien het geleende materiaal vroeger werd afgehaald dan contractueel overeengekomen.
+      li Bij een laattijdige betaling van een factuur worden alle schuldvorderingen die 12UL bezit ten aanzien van de ingebreke zijnde contractspartij, onmiddellijk opeisbaar.
+      li Wanneer UL ten gevolge van overmacht niet in de mogelijkheid verkeert de overeenkomst uit te voeren, doordat het evenemtn niet georganiseerd kan worden, zullen de voorschotten niet terugbetaald kunnen worden. In ieder geval is de contractspartij gehouden zijn deel van de overeenkomst uit te voeren pro rata van het aantal dagen dat 12UL zijn deel van de overeenkomst heeft uitgevoerd.
+      li Indien door de contractspartij materiaal werd geleend aan 12UL zal geen enkele vergoeding aangerekend kunnen worden aan 12UL voor het verlies van materiaal, indien het geleende materiaal vroeger werd afgehaald dan contractueel overeengekomen.
       li Al onze facturen worden geacht aanvaard te zijn indien zij binnen de 15 dagen na ontvangst niet betwist worden bij aangetekende brief.
       li In geval van betwisting zijn uitsluitend de rechtbanken van het gerechtelijk arrondissement Gent bevoegd.
