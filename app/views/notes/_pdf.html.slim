@@ -48,7 +48,7 @@ section.sheet.padding-20mm
                 h2 = "Factuur #{note.id}"
               .level-item
                 = "Datum: #{l Date.today}"
-              - if contact.vatnumber
+              - unless contact.vatnumber.empty?
                 .level-right
                   = "BTW #{contact.vatnumber}"
         tr
@@ -114,7 +114,7 @@ section.sheet.padding-10mm
       li Bij een laattijdige betaling van de factuur zal een forfaitaire vergoeding van 15,00 EUR worden aangerekend per aanmaning die verstuurd wordt naar de ingebreke zijnde contractspartij.
       li Bovenop deze forfaitaire vergoeding zal bij een laattijdige betaling van de factuur, van rechtswege en zonder voorafgaande ingebrekestelling een interest verschuldigd zijn van 10% op het openstaand saldo van de factuur en dit per begonnen maand, waarbij elke begonnen maand een vervallen maand geacht wordt te zijn.
       li Bij een laattijdige betaling van een factuur worden alle schuldvorderingen die 12UL bezit ten aanzien van de ingebreke zijnde contractspartij, onmiddellijk opeisbaar.
-      li Wanneer UL ten gevolge van overmacht niet in de mogelijkheid verkeert de overeenkomst uit te voeren, doordat het evenemtn niet georganiseerd kan worden, zullen de voorschotten niet terugbetaald kunnen worden. In ieder geval is de contractspartij gehouden zijn deel van de overeenkomst uit te voeren pro rata van het aantal dagen dat 12UL zijn deel van de overeenkomst heeft uitgevoerd.
+      li Wanneer UL ten gevolge van overmacht niet in de mogelijkheid verkeert de overeenkomst uit te voeren, doordat het evenement niet georganiseerd kan worden, zullen de voorschotten niet terugbetaald kunnen worden. In ieder geval is de contractspartij gehouden zijn deel van de overeenkomst uit te voeren pro rata van het aantal dagen dat 12UL zijn deel van de overeenkomst heeft uitgevoerd.
       li Indien door de contractspartij materiaal werd geleend aan 12UL zal geen enkele vergoeding aangerekend kunnen worden aan 12UL voor het verlies van materiaal, indien het geleende materiaal vroeger werd afgehaald dan contractueel overeengekomen.
       li Al onze facturen worden geacht aanvaard te zijn indien zij binnen de 15 dagen na ontvangst niet betwist worden bij aangetekende brief.
       li In geval van betwisting zijn uitsluitend de rechtbanken van het gerechtelijk arrondissement Gent bevoegd.

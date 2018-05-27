@@ -10,7 +10,7 @@ class Contact
   field :name, type: String
   field :vatnumber, type: String
 
-  validates_presence_of :name, :vatnumber
+  validates_presence_of :name
 
   def to_s
     name
