@@ -17,17 +17,17 @@ class Note
 
   before_create :generate_and_set_pdf
 
-  field :_id, type: String, default: -> { Note.next_id }
+  field :_id,           type: String, default: -> { Note.next_id }
   field :generated_pdf, type: BSON::Binary
+
+  validates :contact, presence: true
+
+  validates :costs, length: { minimum: 1 }
 
   embeds_many :costs
   accepts_nested_attributes_for :costs
 
   belongs_to :contact
-
-  validates_presence_of :contact
-
-  validates_length_of :costs, minimum: 1
 
   def generate_pdf
     res = nil
@@ -95,28 +95,9 @@ class Note
   end
 
   def force_immutable
-    return if !changed? || !persisted?
+    return unless changed? && persisted?
 
     errors.add(:base, :immutable)
     reload
-  end
-end
-
-class Cost
-  include Mongoid::Document
-  include Mongoid::Enum
-
-  enum :vat, [:v0, :v6, :v21]
-
-  field :description, type: String
-  field :price, type: BigDecimal, default: 0
-  field :amount, type: Integer, default: 1
-
-  validates_presence_of :description, :price, :amount, :vat
-
-  def self.vat_i18n_select_options
-    Cost::VAT.map do |k, _|
-      [I18n.t("mongoid.enums.#{model_name.i18n_key}.vat.#{k}"), k]
-    end
   end
 end

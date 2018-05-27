@@ -32,8 +32,7 @@ class NotesController < ApplicationController
   # POST /notes
   # POST /notes.json
   def create
-    @note = Note.new(note_params)
-    p note_params[:costs]
+    @note = Note.new note_params
 
     respond_to do |format|
       if @note.save
@@ -61,7 +60,7 @@ class NotesController < ApplicationController
   # POST /notes/1/unarchive
   def unarchive
     @note.restore
-    redirect_back(fallback_location: notes_url, notice: 'Factuur werd hersteld.')
+    redirect_back fallback_location: notes_url, notice: 'Factuur werd hersteld.'
   end
 
   def preview

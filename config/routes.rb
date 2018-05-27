@@ -1,12 +1,13 @@
 Rails.application.routes.draw do
-  get '/', to: redirect('/notes')
-  get '/notes/preview', to: 'notes#preview'
+  root to: 'notes#index'
 
-  post '/contacts/:id/unarchive', to: 'contacts#unarchive'
-  post '/notes/:id/unarchive', to: 'notes#unarchive'
+  concern :unarchivable do
+    post 'unarchive', on: :member
+  end
 
-  resources :notes, only: [:index, :new, :create, :show, :destroy]
-  resources :contacts
+  resources :notes, concerns: :unarchivable do
+    get 'preview', on: :collection
+  end
 
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  resources :contacts, concerns: :unarchivable
 end

@@ -1,0 +1,9 @@
+- if object.errors.any?
+  .notification.is-danger#error_explanation
+    p De volgende #{pluralize(object.errors.count, 'fout', 'fouten')}
+       zorgden ervoor dat dit object niet kon worden aangemaakt:
+    .content
+      ul
+        - object.errors.full_messages.each do |message|
+          li
+            = message

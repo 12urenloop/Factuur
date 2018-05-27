@@ -1,13 +1,6 @@
 = form_with(model: contact, local: true) do |form|
-  - if contact.errors.any?
-    .notification.is-danger#error_explanation
-      p De volgende #{pluralize(contact.errors.count, 'fout', 'fouten')}
-         zorgden ervoor dat dit contact niet kon worden aangemaakt:
-      .content
-        ul
-          - contact.errors.full_messages.each do |message|
-            li
-              = message
+  = render 'errors', object: contact
+
   .field
     = form.label 'Naam', class: 'label'
     p.control
@@ -34,7 +27,7 @@
       = f.text_field :country, class: 'input'
   .actions.field.is-grouped
     p.control
-      = form.submit "Bestendige #{action}", class: 'button is-primary'
+      = form.submit "Begunstigde #{action}", class: 'button is-primary'
     p.control
       = link_to 'Terug', contacts_path, class: 'button is-default'
 

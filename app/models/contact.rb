@@ -3,33 +3,17 @@ class Contact
   # Soft delete
   include Mongoid::Paranoia
 
-  embeds_one :address
+  field :name,      type: String
+  field :vatnumber, type: String
+
+  validates :name, :vatnumber, presence: true
 
   has_many :notes
 
-  field :name, type: String
-  field :vatnumber, type: String
+  embeds_one :address
 
-  validates_presence_of :name
-
+  # Overwrite string representation
   def to_s
     name
   end
-
-end
-
-class Address
-  include Mongoid::Document
-  # Soft delete
-  include Mongoid::Paranoia
-
-  field :beneficiary, type: String
-  field :street, type: String
-  field :zip_code, type: String
-  field :city, type: String
-  field :country, type: String
-
-  validates_presence_of :street, :zip_code, :city, :country
-
-  embedded_in :contact
 end

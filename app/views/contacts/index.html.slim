@@ -1,9 +1,8 @@
 .content
-  h1 Bestendigen #{'(gearchiveerd)' if @archived}
+  h1 Begunstigden #{'(gearchiveerd)' if @archived}
   table
     thead
       tr
-        //th Klantnummer
         th Naam
         th Btw-nummer
         th Begunstigde
@@ -15,7 +14,6 @@
     tbody
       - @contacts.each do |contact|
         tr
-          //td = contact.id
           td = contact.name
           td = contact.vatnumber
           td = contact.address.beneficiary
@@ -27,7 +25,7 @@
             .field.is-grouped
               - if contact.deleted_at
                 p.control
-                  = button_to 'Herstellen', {action: 'unarchive', id: contact}, class: 'button is-warning'
+                  = button_to 'Herstellen', unarchive_contact_path(contact), class: 'button is-warning'
               - else
                 p.control
                   = link_to 'Aanpassen', edit_contact_path(contact), class: 'button is-primary'

@@ -1,15 +1,8 @@
 .content
   h1 Nieuwe Factuur
   = form_with(model: @note, local: true) do |f|
-    - if @note.errors.any?
-      .notification.is-danger#error_explanation
-        p De volgende #{pluralize(@note.errors.count, 'fout', 'fouten')}
-          zorgden ervoor dat de factuur niet kon worden aangemaakt:
-        .content
-          ul
-            - @note.errors.full_messages.each do |message|
-              li
-                = message
+    = render 'errors', object: @note
+
     .field
       = f.label :id, class: 'label'
       .control
