@@ -28,7 +28,7 @@ section.sheet.padding-20mm
     .column
       p
         = contact.name
-        - if address.beneficiary
+        - unless address.beneficiary.empty?
           br
           = "t.a.v. #{address.beneficiary}"
         br
