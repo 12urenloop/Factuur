@@ -1,5 +1,14 @@
 .content
   h1 Facturen #{'(gearchiveerd)' if @archived}
+  .field.is-grouped
+    - if @archived
+      .control
+        = link_to 'Terug', notes_url, class: 'button is-link'
+    - else
+      .control
+        = link_to 'Nieuwe factuur', new_note_path, class: 'button is-success'
+      .control
+        = link_to 'Gearchiveerde facturen', notes_url(archived: true), class: 'button is-link'
   table
     thead
       tr
@@ -17,7 +26,7 @@
             .field.is-grouped
               - if note.deleted_at
                 p.control = link_to 'Details', note, class: 'button is-primary'
-                p.control = button_to 'Herstellen', {action: 'unarchive', id: note}, class: 'button is-warning'
+                p.control = button_to 'Herstellen', unarchive_note_path(note), class: 'button is-warning'
               - else
                 p.control = link_to 'Download', note_path(id: note.id, format: :pdf), target: :_blank, class: 'button is-primary'
                 p.control = link_to 'Details', note, class: 'button is-warning'
