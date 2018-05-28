@@ -6,7 +6,7 @@ class Contact
   field :name,      type: String
   field :vatnumber, type: String
 
-  validates :name, :vatnumber, presence: true
+  validates :name, presence: true
 
   has_many :notes
 
