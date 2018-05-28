@@ -2,7 +2,7 @@ class Cost
   include Mongoid::Document
   include Mongoid::Enum
 
-  enum :vat, [:v0, :v6, :v21]
+  enum :vat, [:v0, :v6, :v21], default: :v21
 
   field :description, type: String
   field :price,       type: BigDecimal, default: 0
