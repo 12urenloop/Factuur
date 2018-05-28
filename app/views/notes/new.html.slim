@@ -4,11 +4,6 @@
     = render 'errors', object: @note
 
     .field
-      = f.label :id, class: 'label'
-      .control
-        = f.text_field :id, class: 'input'
-
-    .field
       = f.label :contact, class: 'label'
       .control
         = f.select(:contact, options_for_select(Contact.pluck(:name, :id), { selected: f.object.contact.try(:id) }), {}, { id: 'e1', class: 'input' })
