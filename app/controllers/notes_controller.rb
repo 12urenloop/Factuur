@@ -92,6 +92,7 @@ class NotesController < ApplicationController
     params.require(:note).permit(
       :id,
       :contact,
+      :title,
       :kind,
       costs_attributes: [:price, :description, :amount, :vat]
     )

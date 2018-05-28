@@ -19,10 +19,11 @@ class Note
 
   field :_id,           type: String, default: -> { Note.next_id }
   field :generated_pdf, type: BSON::Binary
+  field :title,         type: String
 
   validates :contact, presence: true
-
-  validates :costs, length: { minimum: 1 }
+  validates :costs,   length: { minimum: 1 }
+  validates :title,   presence: true
 
   embeds_many :costs
   accepts_nested_attributes_for :costs

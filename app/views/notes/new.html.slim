@@ -14,6 +14,11 @@
         = f.select(:contact, options_for_select(Contact.pluck(:name, :id), { selected: f.object.contact.try(:id) }), {}, { id: 'e1', class: 'input' })
 
     .field
+      = f.label :title, class: 'label'
+      .control
+        = f.text_field :title, class: 'input'
+
+    .field
       = f.label :kind, class: 'label'
       .control
         .select

@@ -14,6 +14,7 @@
       tr
         th Factuurnummer
         th tav
+        th Titel
         th Aanmaakdatum
         th Acties
     tbody
@@ -21,6 +22,7 @@
         tr
           td = note.id
           td = note.contact
+          td = note.title
           td = l note.created_at, format: :long
           td
             .field.is-grouped
