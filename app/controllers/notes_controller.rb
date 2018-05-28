@@ -26,7 +26,12 @@ class NotesController < ApplicationController
 
   # GET /notes/new
   def new
-    @note = Note.new
+    if params[:id]
+      @note = Note.find params[:id]
+      @note.id = Note.next_id
+    else
+      @note = Note.new
+    end
   end
 
   # POST /notes

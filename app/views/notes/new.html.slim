@@ -1,6 +1,6 @@
 .content
   h1 Nieuwe Factuur
-  = form_with(model: @note, local: true) do |f|
+  = form_with(model: @note, url: notes_path, method: :post, local: true) do |f|
     = render 'errors', object: @note
 
     .field
@@ -11,7 +11,7 @@
     .field
       = f.label :contact, class: 'label'
       .control
-        = f.collection_select(:contact, Contact.all, :id, :name, {}, id: 'e1', class: 'input')
+        = f.select(:contact, options_for_select(Contact.pluck(:name, :id), { selected: f.object.contact.try(:id) }), {}, { id: 'e1', class: 'input' })
 
     .field
       = f.label :kind, class: 'label'

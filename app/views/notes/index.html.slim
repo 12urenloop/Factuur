@@ -29,6 +29,7 @@
                 p.control = button_to 'Herstellen', unarchive_note_path(note), class: 'button is-warning'
               - else
                 p.control = link_to 'Download', note_path(id: note.id, format: :pdf), target: :_blank, class: 'button is-primary'
+                p.control = link_to 'Dupliceer', new_note_path(id: note), class: 'button'
                 p.control = link_to 'Details', note, class: 'button is-warning'
                 p.control = link_to 'Archiveer', note, method: :delete, data: { confirm: 'Ben je zeker dat je deze factuur wilt archiveren?' }, class: 'button is-danger'
   br
