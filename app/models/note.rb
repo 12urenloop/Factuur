@@ -10,7 +10,7 @@ class Note
   # Factuurtypes
   include Mongoid::Enum
 
-  enum :kind, [:invoice, :credit, :income]
+  enum :kind, [:invoice, :credit, :income, :reminder]
 
   # Notes should be immutable and never changed.
   validate :force_immutable

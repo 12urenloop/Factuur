@@ -100,7 +100,11 @@ section.sheet.padding-20mm
   .columns
     .column
       p
-        - unless note.kind == :credit
+        - if note.kind == :credit
+          strong Bovenvermeld bedrag zal op de rekening BE30 7330 0269 4711 gestort worden.
+        - elsif note.kind == :reminder
+          strong Gelieve bovenvermeld bedrag binnen de 8 dagen op rekeningnummer BE23 4470 0889 2191 met vermelding van het factuurnummer te storten. Indien wij het openstaande bedrag niet binnen 8 dagen ontvangen hebben dan zal deze vordering uit handen worden gegeven aan een incassobureau. Alle hieruit voortkomende kosten zullen voor uw rekening komen.
+        - else
           strong Gelieve bovenvermeld bedrag binnen de 14 dagen na factuurdatum te betalen op rekeningnummer BE23 4470 0889 2191 met vermelding van het factuurnummer.
         |  Alle facturen worden geregeld door onze Algemene Voorwaarden (zie volgende bladzijde).
 

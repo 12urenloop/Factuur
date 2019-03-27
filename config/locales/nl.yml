@@ -25,6 +25,7 @@ nl:
           invoice: "Factuur"
           credit: "Kredietnota"
           income: "Inkomstennota"
+          reminder: "Aanmaning"
       cost:
         vat:
           v0: "0%"
