@@ -80,6 +80,7 @@ class Note
     else
       results.first.id.next
     end
+    "#{dt.year}-004"
   end
 
   # Because mongoid-enums doesn't to I18N
