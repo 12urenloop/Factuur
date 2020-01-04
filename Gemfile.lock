@@ -195,7 +195,7 @@ GEM
       method_source (~> 0.8.1)
       slop (~> 3.4)
     public_suffix (2.0.5)
-    puma (3.9.1)
+    puma (3.12.2)
     rack (2.0.3)
     rack-contrib (1.2.0)
       rack (>= 0.9.1)
@@ -334,7 +334,7 @@ DEPENDENCIES
   mongoid
   mongoid-enum!
   mongoid_paranoia
-  puma (~> 3.7)
+  puma (~> 3.12)
   rails (~> 5.1.1)
   rails-i18n (~> 5.0.0)
   rspec
