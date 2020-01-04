@@ -19,5 +19,5 @@ Adapt the basic auth secrets in config/secrets.yml
 <To be completed by@#redfast00>
 
 ## Testen
-Run `rails t`
+Run `bundle exec rake`
 

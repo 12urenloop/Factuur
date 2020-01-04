@@ -2,7 +2,7 @@ Feature: Working with notes
 
   Background:
     Given a contact named "Jantje"
-    And an note with id "2017-06"
+    And an note with id "2017-006"
 
   Scenario: Notes are immutable
     When we try to edit the note
@@ -25,5 +25,5 @@ Feature: Working with notes
 
     Examples:
       | year | id |
-      | 2017 | 2017-07 |
-      | 2018 | 2018-01 |
+      | 2017 | 2017-007 |
+      | 2018 | 2018-001 |
