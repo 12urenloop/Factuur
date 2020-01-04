@@ -28,17 +28,6 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
-# MongoDB is our main database
-gem 'mongoid'
-# Speed up BSON serialization
-gem 'bson_ext'
-
-# Soft delete
-gem 'mongoid_paranoia'
-
-# Mongoid enums
-gem 'mongoid-enum', git: 'https://github.com/StudentKickOff/mongoid-enum'
-
 # Bulma is CSS bae
 gem 'bulma-rails'
 
@@ -90,6 +79,8 @@ group :development, :test do
   gem 'capistrano-bundler', '~> 1.2'
   gem 'capistrano-passenger'
   gem "capistrano-rails"
+
+  gem 'sqlite3'
 end
 
 group :development do
@@ -106,6 +97,10 @@ group :development do
 
   # rails_panel
   gem 'meta_request'
+end
+
+group :production do
+  gem 'mysql'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
