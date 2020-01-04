@@ -9,7 +9,7 @@ class Note < ActiveRecord::Base
   # Notes should be immutable and never changed.
   validate :force_immutable
 
-  before_create :generate_and_set__id
+  before_create :generate_and_set_note_number
   before_create :generate_and_set_pdf
 
   validates :contact, presence: true
@@ -59,7 +59,7 @@ class Note < ActiveRecord::Base
     res
   end
 
-  def self.next_id
+  def self.next_note_number
     dt = Date.today
     boy = dt.beginning_of_year
     eoy = dt.end_of_year
@@ -69,7 +69,7 @@ class Note < ActiveRecord::Base
     if results.empty?
       "#{dt.year}-001"
     else
-      results.first._id.next
+      results.first.note_number.next
     end
   end
 
@@ -82,8 +82,8 @@ class Note < ActiveRecord::Base
 
   private
 
-  def generate_and_set__id
-    self._id = self.class.next_id
+  def generate_and_set_note_number
+    self.note_number = self.class.next_note_number
   end
 
   def generate_and_set_pdf

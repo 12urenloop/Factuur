@@ -46,7 +46,7 @@ ActiveRecord::Schema.define(version: 20200104144931) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "kind", default: 0, null: false
-    t.string "_id", null: false
+    t.string "note_number", null: false
     t.string "title", null: false
     t.binary "generated_pdf"
     t.integer "contact_id"

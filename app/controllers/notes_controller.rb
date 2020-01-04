@@ -27,8 +27,8 @@ class NotesController < ApplicationController
   # GET /notes/new
   def new
     if params[:id]
-      @note = Note.find(params[:id]).dup
-      @note._id = Note.next_id
+      @note = Note.find(params[:id]).clone
+      @note.note_number = Note.next_note_number
     else
       @note = Note.new
     end

@@ -20,7 +20,7 @@
     tbody
       - @notes.each do |note|
         tr
-          td = note._id
+          td = note.note_number
           td = note.contact
           td = note.title
           td = l note.created_at, format: :long
