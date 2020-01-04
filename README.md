@@ -4,10 +4,10 @@ Onze huisgemaakte factuurgeneratie-applicatie.
 ## Hoe start ik?
 
 1. Installeer:
-    - Roebie 2.4.0
+    - Ruby 2.5.0
     - Bundler
     - Node (met `npm`)
-    - MongoDB
+    - Sqlite
 2. `bundle install`
 3. `npm install`
 4. `sudo systemctl start mongodb`
@@ -16,9 +16,6 @@ Onze huisgemaakte factuurgeneratie-applicatie.
 7. ???
 8. PROFIT
 
-
-## Databank
-MongoDB, want deze app moet webscale zijn enzo.
 
 ## Configuratie
 Op dit moment nog niets.
