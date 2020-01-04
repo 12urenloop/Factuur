@@ -6,10 +6,9 @@ Onze huisgemaakte factuurgeneratie-applicatie.
 1. Installeer:
     - Ruby 2.5.0
     - Bundler
-    - Node (met `npm`)
     - Sqlite
+    - wkhtmltopdf
 2. `bundle install`
-3. `npm install`
 4. `rails db:setup`
 5. `rails s`
 6. Browse to `http://localhost:3000`

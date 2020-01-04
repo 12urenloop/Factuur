@@ -1,7 +1,0 @@
-{
-  "name": "Factuur",
-  "private": true,
-  "dependencies": {
-    "electron-pdf": "^1.3.0"
-  }
-}
