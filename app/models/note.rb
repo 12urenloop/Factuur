@@ -80,6 +80,10 @@ class Note < ActiveRecord::Base
     end
   end
 
+  def self.find_by_note_number_or_id(id)
+    unscoped.find_by_note_number(id) || unscoped.find(id)
+  end
+
   private
 
   def generate_and_set_note_number
