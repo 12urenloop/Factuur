@@ -8,9 +8,11 @@ Feature: Working with notes
     When we try to edit the note
     Then saving should not succeed
 
+  @wip
   Scenario: A note should generate a pdf file
     Then a pdf should have been generated alongside it
 
+  @wip
   Scenario: Creating an note
     Given the user is on the page to create a new note
     When the user fills in the note information
@@ -18,6 +20,7 @@ Feature: Working with notes
     Then an note is created
     And the user should see the new note
 
+  @wip
   Scenario Outline: Incrementing note numbers
     Given the year is <year>
     When we create a new note

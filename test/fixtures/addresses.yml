@@ -1,0 +1,15 @@
+address_one:
+  beneficiary: "BE123465"
+  street: "teststraat"
+  zip_code: "9000"
+  city: "Gent"
+  country: "Belgium"
+  contact: contact_one
+
+address_two:
+  beneficiary: "BE123465"
+  street: "teststraat"
+  zip_code: "9000"
+  city: "Gent"
+  country: "Belgium"
+  contact: contact_two
