@@ -24,8 +24,16 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one: {}
+one:
+  title: "First"
+  contact_id: 0
+  kind: 1
+  note_number: "123"
 # column: value
 #
-two: {}
-# column: value
+
+second:
+  title: "Second"
+  contact_id: 1
+  kind: 2
+  note_number: "456"

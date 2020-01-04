@@ -2,45 +2,31 @@ require 'test_helper'
 
 class NotesControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @note = notes(:one)
+    @note = Note.first
+    @auth_headers = { Authorization: ActionController::HttpAuthentication::Basic.encode_credentials(
+      Rails.application.secrets.auth_username,
+      Rails.application.secrets.auth_password)
+    }
   end
 
   test "should get index" do
-    get notes_url
+    get notes_url, headers: @auth_headers
     assert_response :success
   end
 
   test "should get new" do
-    get new_note_url
+    get new_note_url, headers: @auth_headers
     assert_response :success
-  end
-
-  test "should create note" do
-    assert_difference('Note.count') do
-      post notes_url, params: { note: { description: @note.description, generated_pdf: @note.generated_pdf } }
-    end
-
-    assert_redirected_to note_url(Note.last)
   end
 
   test "should show note" do
-    get note_url(@note)
+    get note_url(@note), headers: @auth_headers
     assert_response :success
-  end
-
-  test "should get edit" do
-    get edit_note_url(@note)
-    assert_response :success
-  end
-
-  test "should update note" do
-    patch note_url(@note), params: { note: { description: @note.description, generated_pdf: @note.generated_pdf } }
-    assert_redirected_to note_url(@note)
   end
 
   test "should destroy note" do
     assert_difference('Note.count', -1) do
-      delete note_url(@note)
+      delete note_url(@note), headers: @auth_headers
     end
 
     assert_redirected_to notes_url
