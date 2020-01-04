@@ -4,32 +4,20 @@ Onze huisgemaakte factuurgeneratie-applicatie.
 ## Hoe start ik?
 
 1. Installeer:
-    - Roebie 2.4.0
+    - Ruby 2.5.0
     - Bundler
     - Node (met `npm`)
-    - MongoDB
+    - Sqlite
 2. `bundle install`
 3. `npm install`
-4. `sudo systemctl start mongodb`
-5. `rake db:setup`
-6. `rails server` (start de server)
-7. ???
-8. PROFIT
-
-
-## Databank
-MongoDB, want deze app moet webscale zijn enzo.
-
-## Configuratie
-Op dit moment nog niets.
+4. `rails db:setup`
+5. `rails s`
+6. Browse to `http://localhost:3000`
 
 ## Deployment
-Lol, draai development in production yo.
+Adapt the basic auth secrets in config/secrets.yml
+<To be completed by@#redfast00>
 
 ## Testen
-Hah.
-
-Blijkbaar is Lorin fan van komkommers.
-
-
+Run `bundle exec rake`
 

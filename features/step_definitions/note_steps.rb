@@ -8,7 +8,7 @@ Given(/^a contact named "([^"]*)"$/) do |name|
   data = {
     name: name,
     vatnumber: 'BE1382041234',
-    address: {
+    address_attributes: {
       beneficiary: 'Foo',
       street: 'Bar',
       zip_code: 'Bar',
@@ -29,7 +29,7 @@ end
 
 Then(/^a pdf should have been generated alongside it$/) do
   expect(@note.generated_pdf).to_not be nil
-  expect(MimeMagic.by_magic(@note.generated_pdf.data).type).to eq('application/pdf')
+  expect(MimeMagic.by_magic(@note.generated_pdf).type).to eq('application/pdf')
 end
 
 Given(/^the user is on the page to create a new note$/) do
@@ -61,5 +61,5 @@ When(/^we create a new note$/) do
 end
 
 Then(/^the note id should be (.+)$/) do |id|
-  Note.last.id == id
+  Note.last.note_number == id
 end

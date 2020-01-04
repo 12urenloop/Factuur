@@ -9,7 +9,7 @@
     = form.label 'btw-nummer', class: 'label'
     p.control
       = form.text_field :vatnumber, class: 'input'
-  = form.fields_for :address, contact.address do |f|
+  = form.fields_for :address do |f|
     .field
       = f.label 'Begunstigde', class: 'label'
       = f.text_field :beneficiary, class: 'input'

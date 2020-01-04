@@ -1,15 +1,26 @@
-class Address
-  include Mongoid::Document
-  # Soft delete
-  include Mongoid::Paranoia
+# == Schema Information
+#
+# Table name: addresses
+#
+#  id          :integer          not null, primary key
+#  beneficiary :string
+#  city        :string           not null
+#  country     :string           not null
+#  deleted_at  :datetime
+#  street      :string           not null
+#  zip_code    :string           not null
+#  contact_id  :integer          not null
+#
+# Indexes
+#
+#  index_addresses_on_contact_id  (contact_id)
+#  index_addresses_on_deleted_at  (deleted_at)
+#
 
-  field :beneficiary, type: String
-  field :street,      type: String
-  field :zip_code,    type: String
-  field :city,        type: String
-  field :country,     type: String
+class Address < ActiveRecord::Base
+  acts_as_paranoid
 
   validates :street, :zip_code, :city, :country, presence: true
 
-  embedded_in :contact
+  belongs_to :contact
 end

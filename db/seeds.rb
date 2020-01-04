@@ -3,7 +3,7 @@
 10.times do
   Contact.create(name: Faker::Company.name,
                  vatnumber: Array.new(10) { Random.rand(10) }.join,
-                 address: {
+                 address_attributes: {
                    beneficiary: Faker::Name.name,
                    street: Faker::Address.street_address,
                    zip_code: Faker::Address.zip_code,

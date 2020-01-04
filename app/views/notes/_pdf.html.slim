@@ -45,7 +45,7 @@ section.sheet.padding-20mm
           th[colspan="5"]
             .level
               .level-left
-                h2 = "Factuur #{note.id}"
+                h2 = "Factuur #{note.note_number}"
               .level-item
                 = "Datum: #{l Date.today}"
               - unless contact.vatnumber.empty?
@@ -91,7 +91,7 @@ section.sheet.padding-20mm
     .column
       table.table.is-bordered
         tbody
-          - Cost::VAT.each do |vat|
+          - Cost.vats.each do |vat|
             - if vat_group.has_key? vat
               tr
                 td  = I18n.t("mongoid.enums.cost.vat.#{vat}")

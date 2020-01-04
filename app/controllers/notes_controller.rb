@@ -1,5 +1,5 @@
 class NotesController < ApplicationController
-  before_action :set_note, only: [:show, :edit, :destroy, :unarchive]
+  before_action :set_note, only: [:edit, :destroy, :unarchive]
 
   # GET /notes
   # GET /notes.json
@@ -15,20 +15,21 @@ class NotesController < ApplicationController
   # GET /notes/1
   # GET /notes/1.json
   def show
-    @pdf_path = note_path(id: @note.id, format: :pdf)
+    @note = Note.find_by_note_number_or_id(params[:id])
+    @pdf_path = note_path(id: @note.note_number, format: :pdf)
 
     respond_to do |format|
       format.html
       format.json
-      format.pdf { send_data(@note.generated_pdf.data, filename: 'factuur.pdf', type: :pdf, disposition: :inline) }
+      format.pdf { send_data(@note.generated_pdf, filename: 'factuur.pdf', type: :pdf, disposition: :inline) }
     end
   end
 
   # GET /notes/new
   def new
     if params[:id]
-      @note = Note.find params[:id]
-      @note.id = Note.next_id
+      @note = Note.find(params[:id]).clone
+      @note.note_number = Note.next_note_number
     else
       @note = Note.new
     end
@@ -90,7 +91,7 @@ class NotesController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def note_params
     params.require(:note).permit(
-      :contact,
+      :contact_id,
       :title,
       :kind,
       costs_attributes: [:price, :description, :amount, :vat]
