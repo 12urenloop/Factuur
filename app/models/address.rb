@@ -1,15 +1,7 @@
-class Address
-  include Mongoid::Document
-  # Soft delete
-  include Mongoid::Paranoia
-
-  field :beneficiary, type: String
-  field :street,      type: String
-  field :zip_code,    type: String
-  field :city,        type: String
-  field :country,     type: String
+class Address < ActiveRecord::Base
+  acts_as_paranoid
 
   validates :street, :zip_code, :city, :country, presence: true
 
-  embedded_in :contact
+  belongs_to :contact
 end

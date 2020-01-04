@@ -1,16 +1,12 @@
-class Contact
-  include Mongoid::Document
-  # Soft delete
-  include Mongoid::Paranoia
-
-  field :name,      type: String
-  field :vatnumber, type: String
+class Contact < ActiveRecord::Base
+  acts_as_paranoid
 
   validates :name, presence: true
 
+  has_one :address
   has_many :notes
 
-  embeds_one :address
+  accepts_nested_attributes_for :address
 
   # Overwrite string representation
   def to_s

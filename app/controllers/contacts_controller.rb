@@ -15,6 +15,7 @@ class ContactsController < ApplicationController
   # GET /contacts/new
   def new
     @contact = Contact.new
+    @contact.address = Address.new
   end
 
   # POST /contacts
@@ -73,6 +74,6 @@ class ContactsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def contact_params
-    params.require(:contact).permit(:name, :vatnumber, address: [:beneficiary, :street, :zip_code, :city, :country])
+    params.require(:contact).permit(:name, :vatnumber, address_attributes: [:id, :beneficiary, :street, :zip_code, :city, :country])
   end
 end

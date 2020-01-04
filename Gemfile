@@ -28,6 +28,9 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
+# Paranoia
+gem 'paranoia', '~> 2.1', '>= 2.1.5'
+
 # Bulma is CSS bae
 gem 'bulma-rails'
 
@@ -87,9 +90,6 @@ group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '>= 3.0.5', '< 3.2'
-  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring'
-  gem 'spring-watcher-listen', '~> 2.0.0'
 
   # Livereload
   gem 'guard'
@@ -97,6 +97,12 @@ group :development do
 
   # rails_panel
   gem 'meta_request'
+
+  # Annotations are cool
+  gem 'annotate'
+
+  # Fix rails c issue
+  gem 'rb-readline'
 end
 
 group :production do
