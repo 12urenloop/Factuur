@@ -43,40 +43,15 @@ class Note < ActiveRecord::Base
 
   def generate_pdf
     res = nil
-    Dir.mktmpdir do |dir|
-      # TODO: Put this in a config
-      # command = 'electron-pdf'
-      exe = 'node_modules/.bin/electron-pdf'
-      exe.prepend('xvfb-run -n 9 ') if Rails.env.production?
-      input_file = "#{dir}/input.html"
-      output_file = "#{dir}/output.pdf"
 
-      s = ApplicationController.render(
-        'notes/note_pdf',
-        layout: 'paper',
-        locals: {
-          note: self
-        }
-      )
-      File.write(input_file, s)
-
-      logger.info '======'
-      command = "#{exe} #{input_file} #{output_file}"
-      logger.info "Running '#{command}'"
-      Open3.popen3(command) do |_, out, err, wait_thr|
-        logger.info "STDOUT: #{out.read}"
-        logger.info "STDERR: #{err.read}"
-
-        if wait_thr.value == 0
-          res = File.binread(output_file)
-        else
-          errors.add :generated_pdf, 'Error creating PDF. Check logs.'
-        end
-      end
-      logger.info '======'
-    end
-
-    res
+    s = ApplicationController.render(
+      'notes/note_pdf',
+      layout: 'paper',
+      locals: {
+        note: self
+      }
+    )
+    return WickedPdf.new.pdf_from_string(s)
   end
 
   def self.next_note_number
