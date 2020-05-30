@@ -1,0 +1,27 @@
+version: '3.3'
+
+services:
+   db:
+     image: mysql:5.7
+     volumes:
+       - db_data:/var/lib/mysql
+     restart: always
+     environment:
+       MYSQL_ROOT_PASSWORD: factuur
+       MYSQL_DATABASE: factuur
+       MYSQL_USER: factuur
+       MYSQL_PASSWORD: factuur
+
+   web:
+     build: .
+     depends_on:
+       - db
+     ports:
+       - "3000:3000"
+     restart: always
+     environment:
+       DATABASE_URL: mysql2://factuur:factuur@db/factuur
+       RAILS_LOG_TO_STDOUT: 1
+
+volumes:
+    db_data: {}
