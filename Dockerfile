@@ -15,4 +15,4 @@ EXPOSE 3000
 
 ENV RAILS_ENV=production
 # Start the main process.
-CMD ["rails", "server", "-e", "production", "-b", "0.0.0.0"]
+CMD ["bundle", "exec", "rails", "server", "-e", "production", "-b", "0.0.0.0"]
