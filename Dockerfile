@@ -1,4 +1,4 @@
-FROM ruby:2.5-buster
+FROM ruby:2.7-buster
 RUN apt-get update -qq && apt-get install --no-install-recommends -y wkhtmltopdf default-libmysqlclient-dev nodejs
 RUN mkdir /myapp
 WORKDIR /myapp
