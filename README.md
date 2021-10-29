@@ -1,10 +1,11 @@
 # Factuur
+
 Onze huisgemaakte factuurgeneratie-applicatie.
 
 ## Hoe start ik?
 
 1. Installeer:
-    - Ruby 2.5.0
+    - Ruby 2.7.3
     - Bundler
     - Sqlite
     - wkhtmltopdf
