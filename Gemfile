@@ -33,7 +33,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'bcrypt', '~> 3.1.7'
 
 # Paranoia
-gem 'paranoia', '~> 2.1', '>= 2.1.5'
+gem 'paranoia'
 
 # Bulma is CSS bae
 gem 'bulma-rails'
