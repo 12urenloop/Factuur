@@ -22,6 +22,8 @@ services:
      environment:
        DATABASE_URL: mysql2://factuur:factuur@db/factuur
        RAILS_LOG_TO_STDOUT: 1
+       SECRET_AUTH_USERNAME: admin
+       SECRET_AUTH_PASSWORD: admin
 
 volumes:
     db_data: {}
