@@ -4,7 +4,7 @@
 #
 #  id            :integer          not null, primary key
 #  deleted_at    :datetime
-#  generated_pdf :binary
+#  generated_pdf :binary(16777216)
 #  kind          :integer          default("invoice"), not null
 #  note_number   :string           not null
 #  title         :string           not null

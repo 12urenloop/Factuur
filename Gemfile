@@ -9,9 +9,11 @@ end
 gem 'wicked_pdf'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.2'
+gem 'rails', '~> 6.0'
 # Use Puma as the app server
-gem 'puma', '~> 4.3'
+gem 'puma', '< 6'
+
+gem "webpacker"
 # Use SCSS for stylesheets
 gem 'sassc-rails'
 # Use Uglifier as compressor for JavaScript assets
@@ -31,7 +33,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'bcrypt', '~> 3.1.7'
 
 # Paranoia
-gem 'paranoia', '~> 2.1', '>= 2.1.5'
+gem 'paranoia'
 
 # Bulma is CSS bae
 gem 'bulma-rails'
@@ -40,7 +42,7 @@ gem 'bulma-rails'
 gem 'slim-rails'
 
 # i18n
-gem 'rails-i18n', '~> 5.0.0'
+gem 'rails-i18n'
 
 # JQuery
 gem "jquery-rails"
@@ -51,7 +53,7 @@ gem "select2-rails"
 # Dynamic forms
 gem 'cocoon'
 
-# Font Awesom
+# Font Awesome
 gem 'font-awesome-rails'
 
 # Use Capistrano for deployment
