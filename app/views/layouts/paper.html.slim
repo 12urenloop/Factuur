@@ -8,7 +8,7 @@ html
     link[rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.4.2/css/bulma.min.css" integrity="sha256-5MiG346KC5bVXrbDQQU0cjus8r2Yxh07eorYOPNUcmw=" crossorigin="anonymous"]
     link[rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paper-css/0.3.0/paper.css"]
     style
-      == Rails.application.assets.find_asset('note_pdf.css').to_s.html_safe
+      == assets_manifest.assets['note_pdf.css'].to_s.html_safe
     style
       | @page { size: A4 }
   body.A4

@@ -1,5 +1,5 @@
 ruby:
-  logo = Base64.encode64 Rails.application.assets['logo_12ul.png'].to_s
+  logo = Base64.encode64 assets_manifest.assets['logo_12ul.png'].to_s
   contact = note.contact
   address = contact.address
   net_total = note.costs.map{ |c| c.price * c.amount }.sum
