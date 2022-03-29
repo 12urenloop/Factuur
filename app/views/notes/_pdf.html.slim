@@ -1,12 +1,12 @@
 ruby:
-  logo = Base64.encode64 assets_manifest.assets['logo_12ul.png'].to_s
+  logo = Base64.encode64 Rails.application.assets.find_asset('logo_12ul.png').to_s
   contact = note.contact
   address = contact.address
   net_total = note.costs.map{ |c| c.price * c.amount }.sum
   vat_group = Hash[note.costs.group_by(&:vat).map{ |vat, costs| [vat, costs.map{ |cost| cost.amount * cost.price * cost.vat[1..-1].to_i / 100 }.sum.round(2)] }]
 section.sheet.padding-20mm
   .columns.is-mobile.page-header
-    img.logo src="data:image/png;base64,#{logo}" alt=""
+    img.logo src="data:image/png;base64,#{logo}" alt="Logo 12urenloop"
     h1
       = I18n.t("mongoid.enums.note.kind.#{note.kind}")
   hr
@@ -79,14 +79,6 @@ section.sheet.padding-20mm
     .column
       strong Contact
       p
-        | Benjamin Cousaert
-        br
-        | +32 (0)477 67 48 68
-        br
-        | Bryan Verfaillie
-        br
-        | +32 (0)477 64 64 30
-        br
         | finance@12urenloop.be
     .column
       table.table.is-bordered
