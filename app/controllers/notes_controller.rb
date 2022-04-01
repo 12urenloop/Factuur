@@ -1,5 +1,5 @@
 class NotesController < ApplicationController
-  before_action :set_note, only: [:edit, :destroy, :unarchive]
+  before_action :set_note, only: [:edit, :update, :archive, :delete, :destroy, :destroy_fully!, :unarchive]
 
   # GET /notes
   # GET /notes.json
@@ -17,7 +17,6 @@ class NotesController < ApplicationController
   def show
     @note = Note.find_by_note_number_or_id(params[:id])
     @pdf_path = note_path(id: @note.note_number, format: :pdf)
-
     respond_to do |format|
       format.html
       format.json
@@ -52,19 +51,44 @@ class NotesController < ApplicationController
     end
   end
 
+  # PATCH/PUT /notes/1
+  # PATCH/PUT /notes/1.json
+  def update
+    respond_to do |format|
+      if @note.update note_params
+        format.html { redirect_to notes_path, notice: 'Factuur werd aangepast.' }
+        format.json { render :index, status: :ok }
+      else
+        format.html { render :edit }
+        format.json { render json: @note.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # POST /notes/1/archive
+  def archive
+    @note = Note.unscoped.find params[:id]
+    @note.destroy
+    redirect_back fallback_location: notes_path, notice: 'Factuur werd gearchiveerd.'
+
+    #respond_to do |format|
+    #  flash[:success] = 'Factuur werd gearchiveerd.'
+    #  format.html { redirect_to notes_url }
+    #  format.json { head :no_content }
+    #end
+  end
+
   # DELETE /notes/1
   # DELETE /notes/1.json
   def destroy
-    @note.destroy
-    respond_to do |format|
-      flash[:success] = 'Factuur werd verwijderd.'
-      format.html { redirect_to notes_url }
-      format.json { head :no_content }
-    end
+    @note = Note.unscoped.find params[:id]
+    @note.really_destroy!
+    redirect_back fallback_location: notes_path, notice: 'Factuur werd verwijderd.'
   end
 
   # POST /notes/1/unarchive
   def unarchive
+    @note = Note.unscoped.find params[:id]
     @note.restore
     redirect_back fallback_location: notes_url, notice: 'Factuur werd hersteld.'
   end

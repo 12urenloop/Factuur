@@ -1,12 +1,12 @@
 ruby:
-  logo = Base64.encode64 Rails.application.assets.find_asset('logo_12ul.png').to_s
+  logo = Base64.encode64 Rails.application.assets['logo_12ul.png'].to_s
   contact = note.contact
   address = contact.address
   net_total = note.costs.map{ |c| c.price * c.amount }.sum
   vat_group = Hash[note.costs.group_by(&:vat).map{ |vat, costs| [vat, costs.map{ |cost| cost.amount * cost.price * cost.vat[1..-1].to_i / 100 }.sum.round(2)] }]
 section.sheet.padding-20mm
   .columns.is-mobile.page-header
-    img.logo src="data:image/png;base64,#{logo}" alt="Logo 12urenloop"
+    img.logo src="data:image/png;base64,#{logo}" alt=""
     h1
       = I18n.t("mongoid.enums.note.kind.#{note.kind}")
   hr

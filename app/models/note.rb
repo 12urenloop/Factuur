@@ -4,7 +4,7 @@
 #
 #  id            :integer          not null, primary key
 #  deleted_at    :datetime
-#  generated_pdf :binary(16777216)
+#  generated_pdf :binary
 #  kind          :integer          default("invoice"), not null
 #  note_number   :string           not null
 #  title         :string           not null
@@ -27,7 +27,7 @@ class Note < ActiveRecord::Base
   enum kind: {invoice: 0, credit: 1, income: 2, reminder: 3}
 
   # Notes should be immutable and never changed.
-  validate :force_immutable
+  #validate :force_immutable
 
   before_create :generate_and_set_note_number
   before_create :generate_and_set_pdf
@@ -43,15 +43,40 @@ class Note < ActiveRecord::Base
 
   def generate_pdf
     res = nil
+    Dir.mktmpdir do |dir|
+      # TODO: Put this in a config
+      # command = 'electron-pdf'
+      exe = 'node_modules/.bin/electron-pdf'
+      exe.prepend('xvfb-run -n 9 ') if Rails.env.production?
+      input_file = "#{dir}/input.html"
+      output_file = "#{dir}/output.pdf"
 
-    s = ApplicationController.render(
-      'notes/note_pdf',
-      layout: 'paper',
-      locals: {
-        note: self
-      }
-    )
-    return WickedPdf.new.pdf_from_string(s)
+      s = ApplicationController.render(
+        'notes/note_pdf',
+        layout: 'paper',
+        locals: {
+          note: self
+        }
+      )
+      File.write(input_file, s)
+
+      logger.info '======'
+      command = "#{exe} #{input_file} #{output_file}"
+      logger.info "Running '#{command}'"
+      Open3.popen3(command) do |_, out, err, wait_thr|
+        logger.info "STDOUT: #{out.read}"
+        logger.info "STDERR: #{err.read}"
+
+        if wait_thr.value == 0
+          res = File.binread(output_file)
+        else
+          errors.add :generated_pdf, 'Error creating PDF. Check logs.'
+        end
+      end
+      logger.info '======'
+    end
+
+    res
   end
 
   def self.next_note_number

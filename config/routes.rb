@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   concern :unarchivable do
     post 'unarchive', on: :member
+    post 'archive', on: :member
   end
 
   resources :notes, concerns: :unarchivable do

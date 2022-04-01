@@ -1,0 +1,43 @@
+= form_with(model: note, local: true) do |f|
+  = render 'errors', object: note
+
+  .field
+    = f.label :contact, class: 'label'
+    .control
+      = f.select(:contact_id, options_for_select(Contact.pluck(:name, :id), { selected: f.object.contact.try(:id) }), {}, { id: 'e1', class: 'input' })
+
+  .field
+    = f.label :title, class: 'label'
+    .control
+      = f.text_field :title, class: 'input'
+
+  .field
+    = f.label :kind, class: 'label'
+    .control
+      .select
+        = f.select(:kind, options_for_select(Note.kind_i18n_select_options), class: 'input')
+
+  .field
+    = f.label :costs, class: 'label'
+    table.table
+      thead
+        th Datum
+        th width='60%' Omschrijving
+        th Bedrag
+        th
+      tbody.costs
+        = f.fields_for :costs do |cost|
+          = render 'cost_fields', f: cost
+      tfoot
+        tr
+          th colspan='3'
+            = link_to_add_association f, :costs, data: {"association-insertion-node" => "tbody.costs"}, class: 'button is-success is-outlined' do
+              span.icon
+                = fa_icon 'plus'
+              span Toevoegen
+
+
+  .actions
+    = f.submit "Factuur #{action}", class: 'button is-success'
+script
+  |  $(document).ready(function() { $("#e1").select2(); });

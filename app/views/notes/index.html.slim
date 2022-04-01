@@ -29,18 +29,10 @@
               - if note.deleted_at
                 p.control = link_to 'Details', note, class: 'button is-primary'
                 p.control = button_to 'Herstellen', unarchive_note_path(note), class: 'button is-warning'
+                p.control = link_to 'Verwijder', note, method: :delete, data: { confirm: 'Ben je zeker dat je deze factuur PERMANENT wil verwijderen?' }, class: 'button is-danger'
               - else
                 p.control = link_to 'Download', note_path(id: note.note_number, format: :pdf), target: :_blank, class: 'button is-primary'
-                p.control = link_to 'Dupliceer', new_note_path(id: note), class: 'button'
-                p.control = link_to 'Details', note, class: 'button is-warning'
-                p.control = link_to 'Archiveer', note, method: :delete, data: { confirm: 'Ben je zeker dat je deze factuur wilt archiveren?' }, class: 'button is-danger'
-  br
-  .field.is-grouped
-    - if @archived
-      .control
-        = link_to 'Terug', notes_url, class: 'button is-link'
-    - else
-      .control
-        = link_to 'Nieuwe factuur', new_note_path, class: 'button is-success'
-      .control
-        = link_to 'Gearchiveerde facturen', notes_url(archived: true), class: 'button is-link'
+                p.control = link_to 'Edit', edit_note_path(note), class: 'button', disabled: true
+                p.control = link_to 'Preview', note, class: 'button is-warning'
+                p.control = link_to 'Archiveer', archive_note_path(note), method: :post, data: { confirm: 'Ben je zeker dat je deze factuur wilt archiveren?' }, class: 'button is-danger'
+                p.control = link_to 'Verwijder', note, method: :delete, data: { confirm: 'Ben je zeker dat je deze factuur wilt verwijderen?' }, class: 'button is-danger'

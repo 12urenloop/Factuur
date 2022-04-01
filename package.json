@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "@rails/webpacker": "5.4.3",
+    "electron-pdf": "^15.0.0",
     "webpack": "^4.46.0",
     "webpack-cli": "^3.3.12"
   },
