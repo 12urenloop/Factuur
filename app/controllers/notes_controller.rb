@@ -118,7 +118,7 @@ class NotesController < ApplicationController
       :contact_id,
       :title,
       :kind,
-      costs_attributes: [:price, :description, :amount, :vat]
+      costs_attributes: [:id, :price, :description, :amount, :vat]
     )
   end
 end

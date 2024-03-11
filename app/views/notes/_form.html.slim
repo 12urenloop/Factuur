@@ -35,9 +35,10 @@
               span.icon
                 = fa_icon 'plus'
               span Toevoegen
-
-
-  .actions
-    = f.submit "Factuur #{action}", class: 'button is-success'
+  .actions.field.is-grouped
+    p.control
+      = f.submit "Factuur #{action}", class: 'button is-primary'
+    p.control
+      = link_to 'Annuleer', notes_path, class: 'button is-default'
 script
   |  $(document).ready(function() { $("#e1").select2(); });

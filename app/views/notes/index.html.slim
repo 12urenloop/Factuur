@@ -32,7 +32,7 @@
                 p.control = link_to 'Verwijder', note, method: :delete, data: { confirm: 'Ben je zeker dat je deze factuur PERMANENT wil verwijderen?' }, class: 'button is-danger'
               - else
                 p.control = link_to 'Download', note_path(id: note.note_number, format: :pdf), target: :_blank, class: 'button is-primary'
-                p.control = link_to 'Edit', edit_note_path(note), class: 'button', disabled: true
+                p.control = link_to 'Edit', edit_note_path(note), class: 'button'
                 p.control = link_to 'Preview', note, class: 'button is-warning'
                 p.control = link_to 'Archiveer', archive_note_path(note), method: :post, data: { confirm: 'Ben je zeker dat je deze factuur wilt archiveren?' }, class: 'button is-danger'
                 p.control = link_to 'Verwijder', note, method: :delete, data: { confirm: 'Ben je zeker dat je deze factuur wilt verwijderen?' }, class: 'button is-danger'

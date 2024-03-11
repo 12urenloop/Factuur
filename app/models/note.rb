@@ -28,6 +28,7 @@ class Note < ActiveRecord::Base
 
   before_create :generate_and_set_note_number
   before_create :generate_and_set_pdf
+  before_update :generate_and_set_pdf
 
   validates :contact, presence: true
   validates :costs,   length: { minimum: 1 }
