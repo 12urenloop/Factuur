@@ -89,8 +89,6 @@ group :development, :test do
   gem 'capistrano-bundler', '~> 1.2'
   gem 'capistrano-passenger'
   gem "capistrano-rails"
-
-  gem 'sqlite3'
 end
 
 group :development do

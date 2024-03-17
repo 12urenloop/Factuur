@@ -15,7 +15,7 @@ jobs:
     - name: Set up Ruby 3.0
       uses: ruby/setup-ruby@v1
       with:
-        ruby-version: 3.0.1
+        ruby-version: 3.3.0
         bundler-cache: true # runs 'bundle install' and caches installed gems automatically
     - name: Test with Rake
       run: |
