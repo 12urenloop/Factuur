@@ -2,6 +2,8 @@ FROM ruby:3.3.0
 
 ENV RAILS_ENV=production
 
+RUN adduser --system --group factuur
+
 WORKDIR /app
 
 # Install Yarn
