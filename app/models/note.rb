@@ -46,7 +46,9 @@ class Note < ActiveRecord::Base
     Dir.mktmpdir do |dir|
       # TODO: Put this in a config
       # command = 'electron-pdf'
-      exe = 'node_modules/.bin/electron-pdf'
+      browser_config = '{ "webPreferences": { "sandbox" : false } }'
+      exe = "node_modules/.bin/electron-pdf --browserConfig #{browser_config}"
+
       exe.prepend('xvfb-run -n 9 ') if Rails.env.production?
       input_file = "#{dir}/input.html"
       output_file = "#{dir}/output.pdf"
