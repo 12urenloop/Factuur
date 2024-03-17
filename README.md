@@ -8,7 +8,6 @@ Onze huisgemaakte factuurgeneratie-applicatie.
     - Ruby 3.3.0
     - Bundler
     - yarn
-    - wkhtmltopdf
 2. `bundle install`
 3. `npm install`
 4. `docker compose -f docker-compose.dev.yml up -d`
