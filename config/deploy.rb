@@ -39,7 +39,7 @@ set :log_level, :debug
 
 # capistrano-docker specific
 set :docker_command, "docker"
-set :docker_copy_data, %w{.env config/database.yml}
+set :docker_copy_data, %w{.env}
 
 set :docker_compose, true
 set :docker_compose_path, "docker-compose.yml"
