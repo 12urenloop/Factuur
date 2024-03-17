@@ -19,10 +19,11 @@ RUN bundle install
 COPY . /app
 
 RUN chown -R factuur:factuur /app
-USER factuur
 
 RUN yarn install
 
 RUN bundle exec rails assets:precompile
+
+USER factuur
 
 CMD bundle exec rails s -b 0.0.0.0
