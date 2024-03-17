@@ -16,6 +16,8 @@ RUN bundle install
 
 COPY . /app
 
+RUN yarn install
+
 RUN bundle exec rails assets:precompile
 
 CMD bundle exec rails s -b 0.0.0.0
