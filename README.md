@@ -5,20 +5,19 @@ Onze huisgemaakte factuurgeneratie-applicatie.
 ## Hoe start ik?
 
 1. Installeer:
-    - Ruby 3.0.1
+    - Ruby 3.3.0
     - Bundler
-    - npm
-    - Sqlite
+    - yarn
     - wkhtmltopdf
 2. `bundle install`
 3. `npm install`
-4. `rails db:setup`
-5. `rails s`
-6. Browse to `http://localhost:3000`
+4. `docker compose -f docker-compose.dev.yml up -d`
+5. `bundle exec rails db:setup`
+6. `bundle exec rails s`
+7. Browse to `http://localhost:3000`
 
 ## Deployment
-Adapt the basic auth secrets in config/secrets.yml
-<To be completed by@#redfast00>
+Run `bundle exec cap production deploy`
 
 ## Testen
 Run `bundle exec rake`
