@@ -80,11 +80,10 @@ group :development, :test do
   gem 'faker'
 
   # Deployment
-  gem "capistrano", "~> 3.9"
-  gem 'capistrano-rbenv', '~> 2.0'
-  gem 'capistrano-bundler', '~> 1.2'
-  gem 'capistrano-passenger'
-  gem "capistrano-rails"
+  gem "capistrano", "~> 3.11", require: false
+  gem 'capistrano-docker', github: 'TomNaessens/capistrano-docker'
+  gem 'ed25519', require: false
+  gem 'bcrypt_pbkdf', require: false
 end
 
 group :development do
