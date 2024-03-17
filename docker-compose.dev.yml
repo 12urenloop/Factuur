@@ -2,15 +2,31 @@ version: '3.3'
 
 services:
    db:
-     image: mysql:5.7
+     image: mariadb:11
      volumes:
-       - db_data:/var/lib/mysql
+       - factuur_data:/var/lib/mysql
      restart: always
      environment:
        MYSQL_ROOT_PASSWORD: strong-password
        MYSQL_DATABASE: factuur
        MYSQL_USER: factuur
        MYSQL_PASSWORD: password
+     ports:
+       - "3306:3306"
+
+   db-test:
+     image: mariadb:11
+     volumes:
+       - factuur_test_data:/var/lib/mysql
+     restart: always
+     environment:
+       MYSQL_ROOT_PASSWORD: strong-password
+       MYSQL_DATABASE: factuur-test
+       MYSQL_USER: factuur
+       MYSQL_PASSWORD: password
+     ports:
+       - "3307:3307"
 
 volumes:
-    db_data: {}
+    factuur_data:
+    factuur_test_data:

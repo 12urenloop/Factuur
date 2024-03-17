@@ -2,14 +2,14 @@
 #
 # Table name: addresses
 #
-#  id          :integer          not null, primary key
-#  beneficiary :string
-#  city        :string           not null
-#  country     :string           not null
+#  id          :bigint           not null, primary key
+#  beneficiary :string(255)
+#  city        :string(255)      not null
+#  country     :string(255)      not null
 #  deleted_at  :datetime
-#  street      :string           not null
-#  zip_code    :string           not null
-#  contact_id  :integer          not null
+#  street      :string(255)      not null
+#  zip_code    :string(255)      not null
+#  contact_id  :bigint           not null
 #
 # Indexes
 #
