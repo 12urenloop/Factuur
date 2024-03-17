@@ -9,7 +9,6 @@ gem 'rails', '~> 6.0'
 # Use Puma as the app server
 gem 'puma', '< 6'
 
-gem "webpacker"
 # Use SCSS for stylesheets
 gem 'sassc-rails'
 # Use Uglifier as compressor for JavaScript assets

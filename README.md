@@ -16,7 +16,8 @@ Onze huisgemaakte factuurgeneratie-applicatie.
 7. Browse to `http://localhost:3000`
 
 ## Deployment
-Run `bundle exec cap production deploy`
+1. Push changes to `master` on GitHub
+2. Run `bundle exec cap production deploy` locally from your device
 
 ## Testen
 Run `bundle exec rake`
