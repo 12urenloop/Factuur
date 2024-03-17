@@ -2,15 +2,15 @@
 #
 # Table name: notes
 #
-#  id            :integer          not null, primary key
+#  id            :bigint           not null, primary key
 #  deleted_at    :datetime
-#  generated_pdf :binary
+#  generated_pdf :binary(429496729
 #  kind          :integer          default("invoice"), not null
-#  note_number   :string           not null
-#  title         :string           not null
+#  note_number   :string(255)      not null
+#  title         :string(255)      not null
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
-#  contact_id    :integer
+#  contact_id    :bigint
 #
 # Indexes
 #

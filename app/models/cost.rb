@@ -2,13 +2,13 @@
 #
 # Table name: costs
 #
-#  id          :integer          not null, primary key
+#  id          :bigint           not null, primary key
 #  amount      :integer          default(1), not null
 #  deleted_at  :datetime
-#  description :string           not null
+#  description :string(255)      not null
 #  price       :decimal(8, 2)    default(0.0), not null
 #  vat         :integer          default("v21"), not null
-#  note_id     :integer
+#  note_id     :bigint
 #
 # Indexes
 #
