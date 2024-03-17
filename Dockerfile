@@ -18,6 +18,7 @@ RUN bundle install
 
 COPY . /app
 
+RUN chown -R factuur:factuur /app
 USER factuur
 
 RUN yarn install
