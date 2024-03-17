@@ -48,6 +48,9 @@ gem "select2-rails"
 # Dynamic forms
 gem 'cocoon'
 
+# Sentry (actually glitchtip)
+gem 'sentry-rails'
+
 # Font Awesome
 gem 'font-awesome-rails'
 
