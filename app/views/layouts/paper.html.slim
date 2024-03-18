@@ -11,5 +11,8 @@ html
       == Rails.application.assets.find_asset('note_pdf.css').to_s.html_safe
     style
       | @page { size: A4 }
+    style
+      | html { -webkit-print-color-adjust: exact; }
+
   body.A4
     == yield
