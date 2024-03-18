@@ -23,9 +23,6 @@ class Note < ActiveRecord::Base
 
   enum kind: {invoice: 0, credit: 1, income: 2, reminder: 3}
 
-  # Notes should be immutable and never changed.
-  #validate :force_immutable
-
   before_create :generate_and_set_note_number
   before_create :generate_and_set_pdf
   before_update :generate_and_set_pdf
@@ -84,12 +81,5 @@ class Note < ActiveRecord::Base
 
   def generate_and_set_pdf
     self.generated_pdf = generate_pdf
-  end
-
-  def force_immutable
-    return unless changed? && persisted?
-
-    errors.add(:base, :immutable)
-    reload
   end
 end
