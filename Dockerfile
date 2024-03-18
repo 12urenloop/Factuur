@@ -2,8 +2,6 @@ FROM ruby:3.3.0
 
 ENV RAILS_ENV=production
 
-RUN adduser --system --group factuur
-
 WORKDIR /app
 
 # Install Yarn
@@ -23,9 +21,5 @@ RUN chown -R factuur:factuur /app
 RUN yarn install
 
 RUN bundle exec rails assets:precompile
-
-RUN chown -R factuur:factuur /app
-
-USER factuur
 
 CMD bundle exec rails s -b 0.0.0.0
