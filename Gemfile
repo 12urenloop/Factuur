@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby "3.3.0"
+ruby "3.3.1"
 
 gem 'dotenv-rails'
 
@@ -48,8 +48,10 @@ gem "select2-rails"
 # Dynamic forms
 gem 'cocoon'
 
-# Sentry (actually glitchtip)
+# Sentry
 gem 'sentry-rails'
+gem 'sentry-ruby'
+gem 'stackprof'
 
 # Font Awesome
 gem 'font-awesome-rails'

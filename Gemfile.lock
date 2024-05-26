@@ -357,6 +357,7 @@ GEM
       net-scp (>= 1.1.2)
       net-sftp (>= 2.1.2)
       net-ssh (>= 2.8.0)
+    stackprof (0.2.26)
     sys-uname (1.2.3)
       ffi (~> 1.1)
     temple (0.10.3)
@@ -424,7 +425,9 @@ DEPENDENCIES
   select2-rails
   selenium-webdriver
   sentry-rails
+  sentry-ruby
   slim-rails
+  stackprof
   timecop
   turbolinks (~> 5)
   tzinfo-data
@@ -432,7 +435,7 @@ DEPENDENCIES
   web-console (>= 3.3.0)
 
 RUBY VERSION
-   ruby 3.3.0p0
+   ruby 3.3.1p55
 
 BUNDLED WITH
    2.5.6

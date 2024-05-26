@@ -5,7 +5,7 @@ Onze huisgemaakte factuurgeneratie-applicatie.
 ## Hoe start ik?
 
 1. Installeer:
-    - Ruby 3.3.0
+    - Ruby 3.3.1
     - Bundler
     - yarn
 2. `bundle install`
